@@ -41,6 +41,13 @@ export const userLogin = (username, password) => {
   };
 };
 
+export const userLogout = () => {
+  return async (dispatch) => {
+    dispatch(setUser(null));
+    window.localStorage.removeItem("loggedBlogappUser");
+  };
+};
+
 export const resumeSession = () => {
   return async (dispatch) => {
     const loggedUserJSON = window.localStorage.getItem("loggedBlogappUser");
