@@ -5,7 +5,7 @@ import { setNotification } from "./notificationReducer";
 
 const userSlice = createSlice({
   name: "user",
-  initialState: {},
+  initialState: null,
   reducers: {
     setUser(state, action) {
       return action.payload;

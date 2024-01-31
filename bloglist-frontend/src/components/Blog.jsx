@@ -1,8 +1,11 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import { addALike, deleteBlog } from "../reducers/blogReducer";
 
-const Blog = ({ blog, addALike, deleteBlog }) => {
+const Blog = ({ blog }) => {
   const [showBlog, setShowBlog] = useState(false);
+  const dispatch = useDispatch();
 
   const blogStyle = {
     paddingTop: 10,
@@ -24,11 +27,11 @@ const Blog = ({ blog, addALike, deleteBlog }) => {
         </a>
         <div style={{ display: "flex" }}>
           <p>likes {blog.likes}</p>
-          <button onClick={() => addALike(blog)}>like</button>
+          <button onClick={() => dispatch(addALike(blog))}>like</button>
         </div>
         <p>{blog.user.name}</p>
         {blogIsFromUser(blog) && (
-          <button onClick={() => deleteBlog(blog)}>remove</button>
+          <button onClick={() => dispatch(deleteBlog(blog))}>remove</button>
         )}
       </div>
     );
@@ -47,8 +50,6 @@ const Blog = ({ blog, addALike, deleteBlog }) => {
 
 Blog.propTypes = {
   blog: PropTypes.object.isRequired,
-  addALike: PropTypes.func.isRequired,
-  deleteBlog: PropTypes.func.isRequired,
 };
 
 export default Blog;

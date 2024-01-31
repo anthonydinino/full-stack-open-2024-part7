@@ -48,4 +48,24 @@ export const createBlog = (newBlog) => {
     }
   };
 };
+
+export const addALike = (blog) => {
+  return async (dispatch) => {
+    await blogService.put(blog.id, {
+      ...blog,
+      likes: blog.likes + 1,
+      user: blog.user.id,
+    });
+    dispatch(addLike(blog.id));
+  };
+};
+
+export const deleteBlog = (blog) => {
+  return async (dispatch) => {
+    if (window.confirm(`Remove blog ${blog.title} by ${blog.author}?`)) {
+      await blogService.deleteBlog(blog.id);
+    }
+    dispatch(initialiseBlogs());
+  };
+};
 export default blogSlice.reducer;
