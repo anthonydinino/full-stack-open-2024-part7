@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 
-const Blog = ({ blog, addLike, deleteBlog }) => {
+const Blog = ({ blog, addALike, deleteBlog }) => {
   const [showBlog, setShowBlog] = useState(false);
 
   const blogStyle = {
@@ -24,7 +24,7 @@ const Blog = ({ blog, addLike, deleteBlog }) => {
         </a>
         <div style={{ display: "flex" }}>
           <p>likes {blog.likes}</p>
-          <button onClick={() => addLike(blog)}>like</button>
+          <button onClick={() => addALike(blog)}>like</button>
         </div>
         <p>{blog.user.name}</p>
         {blogIsFromUser(blog) && (
@@ -47,7 +47,7 @@ const Blog = ({ blog, addLike, deleteBlog }) => {
 
 Blog.propTypes = {
   blog: PropTypes.object.isRequired,
-  addLike: PropTypes.func.isRequired,
+  addALike: PropTypes.func.isRequired,
   deleteBlog: PropTypes.func.isRequired,
 };
 
