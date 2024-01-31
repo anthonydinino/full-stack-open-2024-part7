@@ -33,6 +33,7 @@ describe("favorite blog", () => {
       title: "Go To Statement Considered Harmful",
       author: "Edsger W. Dijkstra",
       likes: 5,
+      user: "659a8b8f20480091af4a91df",
     });
   });
 
@@ -42,6 +43,7 @@ describe("favorite blog", () => {
       title: "Canonical string reduction",
       author: "Edsger W. Dijkstra",
       likes: 12,
+      user: "659a8b8f20480091af4a91df",
     });
   });
 });
