@@ -32,10 +32,10 @@ const Blog = () => {
         <button onClick={() => dispatch(addALike(blog))}>like</button>
       </div>
       <p>{blog.author}</p>
+      <p>added by {blog.user.name} </p>
       {blogIsFromUser(blog) && (
         <button onClick={() => dispatch(deleteBlog(blog))}>remove</button>
       )}
-      <p>added by {blog.user.name} </p>
     </div>
   );
 };
