@@ -31,7 +31,6 @@ blogRouter.post("/", middleware.userExtractor, async (req, res) => {
 });
 
 blogRouter.post("/:id/comments", async (req, res) => {
-  console.log("inside the comments route");
   const { comment } = req.body;
   const updatedBlog = await Blog.findByIdAndUpdate(
     req.params.id,
