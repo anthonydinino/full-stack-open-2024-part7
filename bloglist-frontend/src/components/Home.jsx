@@ -2,24 +2,16 @@ import Togglable from "./Togglable";
 import BlogForm from "./BlogForm";
 import Blogs from "./Blogs";
 import Blog from "./Blog";
-import { useDispatch, useSelector } from "react-redux";
-import { userLogout } from "../reducers/loggedInUserReducer";
+
 import { Route, Routes } from "react-router-dom";
 import Users from "./Users";
 import User from "./User";
+import Navbar from "./Navbar";
 
 const Home = () => {
-  const user = useSelector((state) => state.loggedInUser);
-  const dispatch = useDispatch();
-
   return (
     <>
-      <h2>blogs</h2>
-      <p>
-        {user.username} logged in
-        <button onClick={() => dispatch(userLogout())}>logout</button>
-      </p>
-      <br />
+      <Navbar />
       <Routes>
         <Route path="/users" element={<Users />} />
         <Route path="/users/:id" element={<User />} />
