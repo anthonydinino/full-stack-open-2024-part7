@@ -13,6 +13,14 @@ blogRouter.get("/", async (req, res) => {
   res.status(200).json(blogs);
 });
 
+blogRouter.get("/:id", async (req, res) => {
+  const blog = await Blog.findById(req.params.id).populate("user", {
+    username: true,
+    name: true,
+  });
+  res.status(200).json(blog);
+});
+
 blogRouter.post("/", middleware.userExtractor, async (req, res) => {
   const { title, author, url } = req.body;
   const blog = new Blog({ title, author, url, user: req.user.id });
