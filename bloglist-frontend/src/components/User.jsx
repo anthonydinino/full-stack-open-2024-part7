@@ -25,9 +25,14 @@ const User = () => {
     <div>
       <h2>{user.name}</h2>
       <h3>added blogs</h3>
-      <ul>
+      <ul className="flex flex-col py-3 w-full">
         {user.blogs.map((blog) => (
-          <li key={blog.id}>{blog.title}</li>
+          <li
+            className="no-underline even:bg-slate-100 hover:bg-slate-200 border border-slate-100 hover:even:border-slate-200 p-5"
+            key={blog.id}
+          >
+            {blog.title}
+          </li>
         ))}
       </ul>
     </div>

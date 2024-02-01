@@ -14,27 +14,27 @@ const Users = () => {
       .catch((err) =>
         dispatch(setNotification({ message: err.message, isError: true }, 3))
       );
-  });
+  }, []);
 
   return (
     <>
       <h2>Users</h2>
-      <table>
+      <table className="table-auto">
         <thead>
           <tr>
-            <th></th>
-            <th>blogs created</th>
+            <th className="px-4 py-2"></th>
+            <th className="px-4 py-2">blogs created</th>
           </tr>
         </thead>
         <tbody>
           {users.map((user) => (
             <tr key={user.id}>
-              <td>
+              <td className="border px-4 py-2">
                 <Link to={`${user.id}`} state={user}>
                   {user.name}
                 </Link>
               </td>
-              <td>{user.blogs.length}</td>
+              <td className="border px-4 py-2">{user.blogs.length}</td>
             </tr>
           ))}
         </tbody>

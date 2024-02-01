@@ -11,12 +11,6 @@ const blogSlice = createSlice({
     setBlogs(state, action) {
       return action.payload;
     },
-    addLike(state, action) {
-      const blog = state.find((blog) => blog.id === action.payload);
-      return state
-        .filter((blog) => blog.id !== action.payload)
-        .concat({ ...blog, likes: blog.likes + 1 });
-    },
   },
 });
 
@@ -46,17 +40,6 @@ export const createBlog = (newBlog) => {
     } catch (error) {
       dispatch(setNotification({ message: error.message, isError: true }, 3));
     }
-  };
-};
-
-export const addALike = (blog) => {
-  return async (dispatch) => {
-    await blogService.put(blog.id, {
-      ...blog,
-      likes: blog.likes + 1,
-      user: blog.user.id,
-    });
-    dispatch(addLike(blog.id));
   };
 };
 

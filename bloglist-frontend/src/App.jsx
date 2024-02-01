@@ -14,7 +14,7 @@ const App = () => {
   }, []);
 
   return (
-    <div>
+    <div className="container px-4 ">
       <Notification />
       {loggedInUser ? <Home /> : <Login />}
     </div>

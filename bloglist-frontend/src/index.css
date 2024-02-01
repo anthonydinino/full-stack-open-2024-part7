@@ -1,17 +1,30 @@
-.notification {
-  padding: 10px;
-  font-size: 1.3rem;
-  color: green;
-  border: 3px solid green;
-  border-radius: 5px;
-  background: #d3d3d3;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply text-4xl font-bold;
+  }
+  h2 {
+    @apply text-2xl font-bold;
+  }
+  h3 {
+    @apply text-xl font-bold;
+  }
+  a {
+    @apply text-blue-600 underline;
+  }
 }
 
-.error {
-  border: 3px solid red;
-  color: red;
-}
-
-p {
-  margin: 0;
+@layer components {
+  .btn {
+    @apply font-bold py-2 px-4 rounded;
+  }
+  .notification {
+    @apply border-4 text-green-500 border-green-500 p-4 rounded;
+  }
+  .error {
+    @apply text-red-500 border-red-500;
+  }
 }

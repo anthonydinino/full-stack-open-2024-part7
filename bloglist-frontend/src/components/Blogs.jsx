@@ -7,26 +7,25 @@ const Blogs = () => {
   const dispatch = useDispatch();
   const blogs = useSelector((state) => state.blogs);
 
-  const blogStyle = {
-    paddingTop: 10,
-    paddingLeft: 2,
-    border: "solid",
-    borderWidth: 1,
-    marginBottom: 5,
-  };
-
   useEffect(() => {
     dispatch(initialiseBlogs());
   }, []);
 
   return blogs.length > 0 ? (
-    [...blogs]
-      .sort((a, b) => b.likes - a.likes)
-      .map((blog) => (
-        <div key={blog.id} style={blogStyle} className="blog">
-          <Link to={`blogs/${blog.id}`}>{blog.title}</Link>
-        </div>
-      ))
+    <div className="flex flex-col py-3 w-full">
+      {[...blogs]
+        .sort((a, b) => b.likes - a.likes)
+        .map((blog) => (
+          <Link
+            key={blog.id}
+            className="no-underline even:bg-slate-100 hover:bg-slate-200 border border-slate-100 hover:even:border-slate-200 p-5"
+            to={`blogs/${blog.id}`}
+          >
+            {blog.title} <p className="text-black">{blog.author}</p>
+            <div className=""></div>
+          </Link>
+        ))}
+    </div>
   ) : (
     <p>no blogs...</p>
   );
