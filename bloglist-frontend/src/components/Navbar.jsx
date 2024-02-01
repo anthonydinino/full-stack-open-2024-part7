@@ -24,7 +24,6 @@ const Navbar = () => {
 
       <p></p>
       <h2>blog app</h2>
-      <br />
     </>
   );
 };

@@ -11,7 +11,7 @@ const Blog = () => {
 
   useEffect(() => {
     blogService.getOne(id).then((blog) => setBlog(blog));
-  });
+  }, []);
 
   const blogIsFromUser = (blog) =>
     blog.user.username ===
@@ -36,6 +36,14 @@ const Blog = () => {
       {blogIsFromUser(blog) && (
         <button onClick={() => dispatch(deleteBlog(blog))}>remove</button>
       )}
+      <div>
+        <h3>comments</h3>
+        <ul>
+          {blog.comments.map((comment, i) => (
+            <li key={i}>{comment}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

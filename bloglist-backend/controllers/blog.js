@@ -30,6 +30,22 @@ blogRouter.post("/", middleware.userExtractor, async (req, res) => {
   res.status(201).json(newBlog);
 });
 
+blogRouter.post("/:id/comments", async (req, res) => {
+  console.log("inside the comments route");
+  const { comment } = req.body;
+  const updatedBlog = await Blog.findByIdAndUpdate(
+    req.params.id,
+    { $push: { comments: comment } },
+    { new: true }
+  );
+  res.status(200).json(updatedBlog);
+});
+
+blogRouter.delete("/:id/comments", async (req, res) => {
+  await Blog.findByIdAndUpdate(req.params.id, { $set: { comments: [] } });
+  res.sendStatus(200);
+});
+
 blogRouter.delete("/:id", middleware.userExtractor, async (req, res) => {
   if (!req.user.blogs.map((id) => id.toString()).includes(req.params.id)) {
     return res.sendStatus(404);
