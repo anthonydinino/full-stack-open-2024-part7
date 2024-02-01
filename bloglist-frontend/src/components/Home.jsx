@@ -1,6 +1,7 @@
 import Togglable from "./Togglable";
 import BlogForm from "./BlogForm";
 import Blogs from "./Blogs";
+import Blog from "./Blog";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogout } from "../reducers/loggedInUserReducer";
 import { Route, Routes } from "react-router-dom";
@@ -22,6 +23,7 @@ const Home = () => {
       <Routes>
         <Route path="/users" element={<Users />} />
         <Route path="/users/:id" element={<User />} />
+        <Route path="/blogs/:id" element={<Blog />} />
         <Route
           path="/"
           element={

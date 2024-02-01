@@ -1,55 +1,43 @@
-import { useState } from "react";
-import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import { addALike, deleteBlog } from "../reducers/blogReducer";
+import blogService from "../services/blogs";
 
-const Blog = ({ blog }) => {
-  const [showBlog, setShowBlog] = useState(false);
+const Blog = () => {
   const dispatch = useDispatch();
+  const [blog, setBlog] = useState(null);
+  const { id } = useParams();
 
-  const blogStyle = {
-    paddingTop: 10,
-    paddingLeft: 2,
-    border: "solid",
-    borderWidth: 1,
-    marginBottom: 5,
-  };
+  useEffect(() => {
+    blogService.getOne(id).then((blog) => setBlog(blog));
+  });
 
   const blogIsFromUser = (blog) =>
     blog.user.username ===
     JSON.parse(localStorage.getItem("loggedBlogappUser")).username;
 
-  const blogDetails = () => {
-    return (
-      <div>
-        <a href={blog.url} target="_blank" rel="noreferrer">
-          {blog.url}
-        </a>
-        <div style={{ display: "flex" }}>
-          <p>likes {blog.likes}</p>
-          <button onClick={() => dispatch(addALike(blog))}>like</button>
-        </div>
-        <p>{blog.user.name}</p>
-        {blogIsFromUser(blog) && (
-          <button onClick={() => dispatch(deleteBlog(blog))}>remove</button>
-        )}
-      </div>
-    );
-  };
+  if (!blog) {
+    return null;
+  }
 
   return (
-    <div style={blogStyle} className="blog">
-      {blog.title} {blog.author}{" "}
-      <button onClick={() => setShowBlog(!showBlog)}>
-        {showBlog ? "hide" : "view"}
-      </button>
-      {showBlog && blogDetails()}
+    <div>
+      <h2>{blog.title}</h2>
+      <a href={blog.url} target="_blank" rel="noreferrer">
+        {blog.url}
+      </a>
+      <div style={{ display: "flex" }}>
+        <p>likes {blog.likes}</p>
+        <button onClick={() => dispatch(addALike(blog))}>like</button>
+      </div>
+      <p>{blog.author}</p>
+      {blogIsFromUser(blog) && (
+        <button onClick={() => dispatch(deleteBlog(blog))}>remove</button>
+      )}
+      <p>added by {blog.user.name} </p>
     </div>
   );
-};
-
-Blog.propTypes = {
-  blog: PropTypes.object.isRequired,
 };
 
 export default Blog;

@@ -12,7 +12,7 @@ const User = () => {
 
   useEffect(() => {
     userService
-      .getUser(id)
+      .getOne(id)
       .then((user) => setUser(user))
       .catch((err) => dispatch(setNotification(err.message, 3)));
   }, []);
