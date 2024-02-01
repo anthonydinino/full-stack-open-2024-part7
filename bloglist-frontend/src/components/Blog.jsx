@@ -7,6 +7,7 @@ import blogService from "../services/blogs";
 const Blog = () => {
   const dispatch = useDispatch();
   const [blog, setBlog] = useState(null);
+  const [comment, setComment] = useState("");
   const { id } = useParams();
 
   useEffect(() => {
@@ -16,6 +17,12 @@ const Blog = () => {
   const blogIsFromUser = (blog) =>
     blog.user.username ===
     JSON.parse(localStorage.getItem("loggedBlogappUser")).username;
+
+  const addComment = async (id, comment) => {
+    await blogService.addComment(id, comment);
+    setComment("");
+    blog.comments.push(comment);
+  };
 
   if (!blog) {
     return null;
@@ -38,6 +45,13 @@ const Blog = () => {
       )}
       <div>
         <h3>comments</h3>
+        <input
+          value={comment}
+          onChange={({ target }) => setComment(target.value)}
+        ></input>
+        <button onClick={() => addComment(blog.id, comment)}>
+          add comment
+        </button>
         <ul>
           {blog.comments.map((comment, i) => (
             <li key={i}>{comment}</li>
